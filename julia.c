@@ -8,7 +8,7 @@
  * Quelques belles Julia:
  *  0.285 0.01
  *
- *  TODO: *     - rendre propre la partie mouvements SDL
+ *  TODO: *     - rendre propre la partie mouvements SDL, duplication de code
  *              - choix à l'utisateur pour les couleurs
  *              - ne pas tout recaluler à chaque mouvement
  */
@@ -63,8 +63,8 @@ int usage(int status)
   --ymax=float              default is 1.7\n", stdout);
     fputs("\n\
   Key binding:\n\
-  Clic / +                  zoom +\n\
-  -                         zoom -\n\
+  Left click / +            zoom +\n\
+  Right click / -           zoom -\n\
   Arrow keys                move\n\
   q                         quit\n", stdout);
     exit (status);
@@ -275,7 +275,7 @@ int main(int argc, char ** argv)
                             break;
 
                         case SDLK_q:
-                            exit(EXIT_SUCCESS);
+                            exit (EXIT_SUCCESS);
                             break;
 
                         default:
@@ -285,19 +285,36 @@ int main(int argc, char ** argv)
                     break;
 
                 case SDL_MOUSEBUTTONDOWN:
-                    if (event.button.button == SDL_BUTTON_RIGHT ||
-                            event.button.button == SDL_BUTTON_LEFT) {
-                        m_x = ((double) event.button.x / surface->w) * (g.xmax - g.xmin) + g.xmin;
-                        m_y = ((double) event.button.y / surface->h) * (g.ymax - g.ymin) + g.ymin;
-                        g.xmin = m_x - (g.xmax - g.xmin) / (2 * zoom);
-                        g.xmax = m_x + (g.xmax - g.xmin) / (2 * zoom);
-                        g.ymin = m_y - (g.ymax - g.ymin) / (2 * zoom);
-                        g.ymax = m_y + (g.ymax - g.ymin) / (2 * zoom);
-                        fractal_draw(surface, cx, cy, g, n_iter);
+
+                    switch(event.button.button) {
+                        case SDL_BUTTON_LEFT:
+                            m_x = ((double) event.button.x / surface->w) * (g.xmax - g.xmin) + g.xmin;
+                            m_y = ((double) event.button.y / surface->h) * (g.ymax - g.ymin) + g.ymin;
+                            g.xmin = m_x - (g.xmax - g.xmin) / (2 * zoom);
+                            g.xmax = m_x + (g.xmax - g.xmin) / (2 * zoom);
+                            g.ymin = m_y - (g.ymax - g.ymin) / (2 * zoom);
+                            g.ymax = m_y + (g.ymax - g.ymin) / (2 * zoom);
+                            fractal_draw(surface, cx, cy, g, n_iter);
+                            break;
+
+                        case SDL_BUTTON_RIGHT:
+                            m_x = ((double) event.button.x / surface->w) * (g.xmax - g.xmin) + g.xmin;
+                            m_y = ((double) event.button.y / surface->h) * (g.ymax - g.ymin) + g.ymin;
+                            g.xmin = m_x - unzoom*(m_x - g.xmin);
+                            g.xmax = m_x - unzoom*(m_x - g.xmax);
+                            g.ymin = m_y - unzoom*(m_y - g.ymin);
+                            g.ymax = m_y - unzoom*(m_y - g.ymax);
+                            fractal_draw(surface, cx, cy, g, n_iter);
+                            break;
+
+                        default:
+                            break;
                     }
+
                     break;
+
                 case SDL_QUIT:
-                    return EXIT_SUCCESS;
+                    exit (EXIT_SUCCESS);
                     break;
                 default:
                     break;

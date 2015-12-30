@@ -21,7 +21,7 @@ Draw Julia sets with the [SDL](https://www.libsdl.org/) library
       --ymax=float              default is 1.7
 
       Key binding:
-      Clic / +                  zoom +
-      -                         zoom -
+      Left clic / +             zoom +
+      Right clic / -            zoom -
       Arrow keys                move
       q                         quit
