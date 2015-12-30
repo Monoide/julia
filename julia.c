@@ -56,7 +56,7 @@ int usage(int status)
     fputs("\n\
   Window:\n\
   -h, --height=int          height of the screen in pixels, default is 900\n\
-  -w, --width=int           width of the screen in pixels, defualt is 1400\n\n\
+  -w, --width=int           width of the screen in pixels, default is 1400\n\n\
   --xmin=float              default is -1.4\n\
   --xmax=float              default is 1.4\n\
   --ymin=float              default is -1.7\n\

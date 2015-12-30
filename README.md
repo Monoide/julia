@@ -13,7 +13,7 @@ Draw Julia sets
 
       Window:
       -h, --height=int          height of the screen in pixels, default is 900
-      -w, --width=int           width of the screen in pixels, defualt is 1400
+      -w, --width=int           width of the screen in pixels, default is 1400
 
       --xmin=float              default is -1.4
       --xmax=float              default is 1.4
