@@ -1,5 +1,5 @@
 # julia
-Draw Julia sets
+Draw Julia sets with the [SDL](https://www.libsdl.org/) library
 
     Usage: julia [OPTIONS...] [-- a b]
 
