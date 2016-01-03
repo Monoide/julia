@@ -182,7 +182,6 @@ int main(int argc, char ** argv)
                 height = atoi(optarg);
             case 's':
                 smooth = strtof(optarg, NULL);
-                printf("%f\n", smooth);
                 break;
             case 'u':
                 unzoom = strtof(optarg, NULL);
