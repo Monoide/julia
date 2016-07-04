@@ -17,7 +17,7 @@
 
 /*  TODO: *     - rendre propre la partie mouvements SDL, duplication de code
  *              - choix à l'utisateur pour les couleurs
- *              - ne pas tout recaluler à chaque mouvement
+ *              - ne pas tout recalculer à chaque mouvement
  */
 #include "stdlib.h"
 #include "math.h"
@@ -127,6 +127,7 @@ void fractal_draw(SDL_Surface *sf, double cx, double cy, grid g, int n_iter) {
             /* Black and white*/
             /* ((Uint32*) sf->pixels)[y*sf->w + x] = SDL_MapRGB(sf -> format, c, c, c); */
             /* Weird colord */
+
             ((Uint32*) sf->pixels)[y*sf->w + x] = SDL_MapRGB(sf -> format,
                 (1 + sin(1.5+c*0.35)) * 127, (1 + cos(c*0.12)) * 127, (1 + sin(c*0.6)) * 127);
             /* Bleuet */
